@@ -1,3 +1,8 @@
+check version ==> lsb_release -a ==> 22.04.4 must ==> 
+sudo apt update
+sudo apt upgrade
+sudo do-release-upgrade
+
 
 
 1) Configuration of Docker
