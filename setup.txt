@@ -1,31 +1,38 @@
+
+
 1) Configuration of Docker
 
-- sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg-agent -y
+sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg-agent -y
 
-- curl -fsSL https://download.docker.com/linux/$(awk -F'=' '/^ID=/{ print $NF }' /etc/os-release)/gpg | sudo apt-key add -
+curl -fsSL https://download.docker.com/linux/$(awk -F'=' '/^ID=/{ print $NF }' /etc/os-release)/gpg | sudo apt-key add -
 
-- sudo add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/$(awk -F'=' '/^ID=/{ print $NF }' /etc/os-release) $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/$(awk -F'=' '/^ID=/{ print $NF }' /etc/os-release) $(lsb_release -cs) stable"
 
-- sudo apt install docker-ce docker-compose containerd.io -y
+sudo apt install docker-ce docker-compose containerd.io -y
 
-- sudo systemctl enable docker && sudo systemctl start docker
+sudo systemctl enable docker && sudo systemctl start docker
 
-- sudo usermod -aG docker $USER
+sudo usermod -aG docker $USER
 
-- su - $USER
+su - $USER
 
  
 2) Setting Up the Owncloud image, DB and Network
 
-- mkdir /home/$USER/docker/mariadb -p && mkdir /home/$USER/docker/owncloud -p
 
-- sudo chown "$USER":"$USER" /home/"$USER"/docker -R
+mkdir /home/$USER/docker/mariadb2 -p && mkdir /home/$USER/docker/owncloud2 -p
 
-- sudo docker network create owncloud
+sudo chown "$USER":"$USER" /home/"$USER"/docker -R
 
-- sudo docker run -d --name mariadb --network owncloud --network-alias db -e MYSQL_ROOT_PASSWORD=r00tp@ss -e MYSQL_USER=owncloud_rw -e MYSQL_PASSWORD=OwnCl0ud! -e MYSQL_DATABASE=owncloud -v /home/$USER/docker/mariadb:/var/lib/mysql --restart=unless-stopped mariadb:latest
+sudo docker network create owncloud2
 
-- sudo docker run -d --name owncloud --network owncloud -p 8080:80 -v /home/$USER/docker/owncloud:/var/www/html --restart=unless-stopped owncloud:latest
+sudo docker run -d --name mariadb2 --network owncloud2 --network-alias db2 -e MYSQL_ROOT_PASSWORD=r00tp@ss -e MYSQL_USER=owncloud_rw -e MYSQL_PASSWORD=OwnCl0ud! -e MYSQL_DATABASE=owncloud -v /home/$USER/docker/mariadb2:/var/lib/mysql --restart=unless-stopped mariadb:latest
+
+sudo docker run -d --name owncloud2 --network owncloud2 -p 8081:80 -v /home/$USER/docker/owncloud2:/var/www/html --restart=unless-stopped owncloud:latest
+
+
+
+
 
 3) Open the Browser and type the IP of the Computer and port no 8080 (http://<your_ip>:8080)
 
@@ -41,3 +48,11 @@
 6) Click Finish Setup
 
 7) Login with UserName and Password
+
+
+
+ip 6 no from below
+
+
+
+http://192.168.10.137:8084/index.php/apps/files/?dir=/&fileid=3
