@@ -34,7 +34,7 @@ sudo docker run -d --name owncloud2 --network owncloud2 -p 8081:80 -v /home/$USE
 
 
 
-3) Open the Browser and type the IP of the Computer and port no 8080 (http://<your_ip>:8080)
+3) Open the Browser and type the IP of the Computer and port no 8081 (http://<your_ip>:8080)
 
 4) Just Enter User name and password 
 
