@@ -91,5 +91,8 @@ sudo docker run -d --name owncloud8 --network owncloud8 -p 8082:80 -v /home/$USE
 ip 6 no from below
 
 
+http://172.19.0.1:8085/index.php/apps/files/?dir=/&fileid=3
+
+
 
 http://192.168.10.137:8084/index.php/apps/files/?dir=/&fileid=3
