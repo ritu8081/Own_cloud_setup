@@ -5,6 +5,8 @@ sudo do-release-upgrade
 
 
 
+
+
 1) Configuration of Docker
 
 sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg-agent -y
@@ -24,6 +26,21 @@ su - $USER
  
 2) Setting Up the Owncloud image, DB and Network
 
+- mkdir /home/$USER/docker/mariadb -p && mkdir /home/$USER/docker/owncloud -p
+
+- sudo chown "$USER":"$USER" /home/"$USER"/docker -R
+
+- sudo docker network create owncloud
+
+- sudo docker run -d --name mariadb --network owncloud --network-alias db -e MYSQL_ROOT_PASSWORD=r00tp@ss -e MYSQL_USER=owncloud_rw -e MYSQL_PASSWORD=OwnCl0ud! -e MYSQL_DATABASE=owncloud -v /home/$USER/docker/mariadb:/var/lib/mysql --restart=unless-stopped mariadb:latest
+
+- sudo docker run -d --name owncloud --network owncloud -p 8080:80 -v /home/$USER/docker/owncloud:/var/www/html --restart=unless-stopped owncloud:latest
+
+
+
+====================================================================================================================================
+2) Setting Up the Owncloud image, DB and Network
+
 
 mkdir /home/$USER/docker/mariadb2 -p && mkdir /home/$USER/docker/owncloud2 -p
 
@@ -36,10 +53,25 @@ sudo docker run -d --name mariadb2 --network owncloud2 --network-alias db2 -e MY
 sudo docker run -d --name owncloud2 --network owncloud2 -p 8081:80 -v /home/$USER/docker/owncloud2:/var/www/html --restart=unless-stopped owncloud:latest
 
 
+--all above
+--done in pc no 3 with port 8081 
+--done in corner pc with port 8082
+--need to modify port no according to pc 
+
+===============================================================================================
+mkdir /home/$USER/docker/mariadb8 -p && mkdir /home/$USER/docker/owncloud8 -p
+
+sudo chown "$USER":"$USER" /home/"$USER"/docker -R
+
+sudo docker network create owncloud8
+
+sudo docker run -d --name mariadb8 --network owncloud8 --network-alias db8 -e MYSQL_ROOT_PASSWORD=r00tp@ss -e MYSQL_USER=owncloud_rw -e MYSQL_PASSWORD=OwnCl0ud! -e MYSQL_DATABASE=owncloud -v /home/$USER/docker/mariadb2:/var/lib/mysql --restart=unless-stopped mariadb:latest
+
+sudo docker run -d --name owncloud8 --network owncloud8 -p 8082:80 -v /home/$USER/docker/owncloud8:/var/www/html --restart=unless-stopped owncloud:latest
 
 
 
-3) Open the Browser and type the IP of the Computer and port no 8081 (http://<your_ip>:8080)
+3) Open the Browser and type the IP of the Computer and port no 8080 (http://<your_ip>:8080) ===
 
 4) Just Enter User name and password 
 
